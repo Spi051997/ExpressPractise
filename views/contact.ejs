@@ -1,0 +1,44 @@
+<html>
+
+  <head>
+    <title>
+      <script src="https://kit.fontawesome.com/b42150a88d.js" crossorigin="anonymous"></script>
+      <%= locals.title%>
+    </title>
+  </head>
+
+  <body>
+    <h2>Yellow Book </h2>
+    <ul>
+      <% for (let i of contact) { %>
+        <li>
+          <div>
+          <p>
+            <%= i.name %>
+          </p>
+          <p>
+            <%= i.contact %>
+          </p>
+        </div>
+        <div class="delete-button">
+          <a href="/delete-contact/<%= i.contact %>">
+          <button>Delete</button>
+        </a>
+
+        </div>
+        </li>
+
+        <% } %>
+
+    </ul>
+   <div>
+    <form action="/create-contact" method="POST">
+    <input type="text" name="name" placeholder="Enter name" required>
+    <input type="number" name="contact" placeholder="Enter phone" required>
+    <button type="submit">Add contact</button>
+</form>
+
+<script src="/contactist/assets/jsfiles/home.js"></script>
+   </div>
+  </body>
+</html>
