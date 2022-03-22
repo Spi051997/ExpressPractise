@@ -2,7 +2,7 @@
 
   <head>
     <title>
-      
+      <!-- <script src="https://kit.fontawesome.com/b42150a88d.js" crossorigin="anonymous"></script> -->
       <%= locals.title %>
     </title>
   </head>
@@ -21,7 +21,7 @@
           </p>
         </div>
         <div class="delete-button">
-          <a href="/delete-contact/<%= i.contact %>">
+          <a href="/delete-contact/?id=<%= i._id %>">
           <button>Delete</button>
         </a>
 

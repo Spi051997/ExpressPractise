@@ -18,24 +18,25 @@ app.use(express.urlencoded());
 
 app.use(express.static("assets"));
 
-var contact_list = [
-  {
-    name: "Shubham",
-    contact: "088888876",
-  },
-  {
-    name: "Shreya",
-    contact: "0878656",
-  },
-  {
-    name: "Shruti",
-    contact: "0890567",
-  },
-];
+// var contact_list = [
+//   {
+//     name: "Shubham",
+//     contact: "088888876",
+//   },
+//   {
+//     name: "Shreya",
+//     contact: "0878656",
+//   },
+//   {
+//     name: "Shruti",
+//     contact: "0890567",
+//   },
+// ];
 
+// to get data from Db
 app.get("/contact", (req, res) => {
 
-       Contact.find({name:"sg"},(err,contact)=>
+       Contact.find({},(err,contact)=>
        {
           if(err)
           {
@@ -55,6 +56,7 @@ app.get("/contact", (req, res) => {
   
 });
 
+//  push data into DB
 app.post("/create-contact", (req, res) => {
   // contact_list.push({
   //   name:req.body.name,
@@ -80,28 +82,32 @@ app.post("/create-contact", (req, res) => {
     // console.log(name);
     // console.log(contact)
   });
-  //  return res.redirect("back");
-
-
-  // return res.redirect("back");
-
-  //  console.log(req.body);
-  // return res.redirect("/contact")
+  
 });
 
-app.get("/delete-contact/:contact", (req, res) => {
-  console.log(req.params);
-  let phone = req.params.contact;
+app.get("/delete-contact", (req, res) => {
 
-  let createIndex = contact_list.findIndex(
-    (contact) => contact.contact == phone
-  );
+   let id=req.query.id;
+  //   below is the source id point
+  //  console.log(req.query.id);
+  //  console.log(id);
 
-  if (createIndex != -1) {
-    contact_list.splice(createIndex, 1);
-  }
+   Contact.findByIdAndDelete(id,(err)=>
+   {
+     if(err)
+     {
+       console.log("Error while Deleting the records")
+       return;
+     }
 
-  return res.redirect("back");
+    //  return res.redirect("back");
+   });
+
+
+   return res.redirect("back");
+
+       
+
 });
 
 app.listen(port, () => console.log("Server is up", port));
