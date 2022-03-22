@@ -35,7 +35,7 @@ var contact_list = [
 
 app.get("/contact", (req, res) => {
 
-       Contact.find({},(err,contact)=>
+       Contact.find({name:"sg"},(err,contact)=>
        {
           if(err)
           {
