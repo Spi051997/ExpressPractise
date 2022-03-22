@@ -34,10 +34,25 @@ var contact_list = [
 ];
 
 app.get("/contact", (req, res) => {
-  return res.render("contact", {
+
+       Contact.find({},(err,contact)=>
+       {
+          if(err)
+          {
+            console.log("Error occcured")
+            return;
+          } 
+
+          return res.render("contact", {
     title: "Contact List",
-    contact: contact_list,
+    contact: contact,
   });
+       }
+       
+       
+       
+       )
+  
 });
 
 app.post("/create-contact", (req, res) => {
