@@ -1,10 +1,10 @@
 
 
-const { name } = require("ejs");
+// const { name } = require("ejs");
 const express = require("express");
 
 const path = require("path");
-const port = 4002;
+const port = 3001;
 
 const db = require("./config/mongoose");
 const Contact = require("./model/contact");
@@ -50,7 +50,8 @@ app.post("/create-contact", (req, res) => {
   console.log(Contact)
   Contact.create({
     name:req.body.name,
-    // contact:req.body.contact
+    contact:req.body.contact
+   
   },(err,newContact)=>
   {
       if(err)

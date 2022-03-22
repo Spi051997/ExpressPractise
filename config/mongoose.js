@@ -1,29 +1,22 @@
 
-//require monggose
-// const mongoose=require('mongoose');
 
-// //  give connection to url
-// mongoose.connect('mongodb://localhost:27017/contact_list');
+const mongoose=require('mongoose');
+const mongoAtlasUri =
+  "mongodb+srv://admin:admin@cluster0.7pkpp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-// const  db=mongoose.connection;
+  console.log(mongoAtlasUri);
 
-// db.on('error',console.error.bind(console,'error while connecting to the server'))
+try {
+  // Connect to the MongoDB cluster
+  mongoose.connect(
+    mongoAtlasUri,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => console.log(" Mongoose is connected"),
+  );
+} catch (e) {
+  console.log("could not connect");
+}
 
-// db.once('open',()=>{
-
-//     console.log('Sucessfully Registeed')
-// })
-
-
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://admin:admin@cluster0.7pkpp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-
-client.connect().then(()=>
-{
-    console.log('Sucessful')
-}).catch(()=>
-{
-    console.log('Error');
-})
+const dbConnection = mongoose.connection;
+dbConnection.on("error", (err) => console.log(`Connection error ${err}`));
+dbConnection.once("open", () => console.log("Connected to DB!"));
